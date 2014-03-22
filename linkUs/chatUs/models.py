@@ -33,8 +33,7 @@ class RecurrentEvent(models.Model):
 
 class City(models.Model):
     Name = models.CharField(max_length=255)
-    Latitude = models.DecimalField(max_digits=19, decimal_places=16)
-    Longitude = models.DecimalField(max_digits=19, decimal_places=16)
+    MunID = models.CharField(max_length=255)
         
 class ChatLOG(models.Model):
     Event = models.ForeignKey(Event)
