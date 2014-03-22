@@ -5,11 +5,12 @@ Created on Mar 22, 2014
 '''
 
 import json
+import math
 from pprint import pprint
 from chatUs.models import Event, City
-from utils.geo  import getLatFromStrPoint, getLonFromStrPoint, getDistanceBetween
+from utils.geo  import  getLatFromStrPoint, getLonFromStrPoint, getDistanceBetween
+#from utils  import geo
 from operator import itemgetter
-
 
 
 def AddEvents(events):
@@ -96,7 +97,7 @@ def GetSortedEventList(UserLat,UserLon):
         dist = getDistanceBetween(DjanEvent.Latitude, DjanEvent.Longitude, UserLat, UserLon)
         array.append([DjanEvent,dist])
         
-    SortedList =sorted(array, key=itemgetter(1))
+    SortedList = sorted(array, key=itemgetter(1))
     
     return SortedList
     
@@ -105,8 +106,8 @@ def GetSortedEventList(UserLat,UserLon):
 def main():
     # my code here
     print "Main"
-    FillDB()
-    
+    #FillDB()
+    GetSortedEventList(5,5)
     
 main()
 

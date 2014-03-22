@@ -12,8 +12,6 @@ def getLonFromStrPoint(strPoint):
 
 def getDistanceBetween(x1, y1, x2, y2):
 
-    # Convert latitude and longitude to 
-    # spherical coordinates in radians.
     degrees_to_radians = math.pi/180.0
     radOfEarth = 6371000
         
@@ -33,8 +31,7 @@ def getDistanceBetween(x1, y1, x2, y2):
     #    sin phi sin phi' cos(theta-theta') + cos phi cos phi'
     # distance = rho * arc length
     
-    cos = (math.sin(phi1)*math.sin(phi2)*math.cos(theta1 - theta2) + 
-           math.cos(phi1)*math.cos(phi2))
+    cos = (math.sin(phi1)*math.sin(phi2)*math.cos(theta1 - theta2) + math.cos(phi1)*math.cos(phi2))
     arc = math.acos( cos )
 
     # Remember to multiply arc by the radius of the earth 
