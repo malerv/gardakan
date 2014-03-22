@@ -1,4 +1,4 @@
-#chatdiv
+.chatdiv
 {
     height: 600px;
     width: 400px; /*Same as #chatinput*/
@@ -6,7 +6,7 @@
     margin: 0px;
 }
 
-#messagesContainer
+.messagesContainer
 {
     height: 550px;
     width: 100%;
@@ -15,14 +15,14 @@
     margin: 0px;
 }
 
-#chatinputdiv
+.chatinputdiv
 {
     height: 46px;
     width: 400px; /*Same as #chatdiv*/
     border-top: 1px solid;
 }
 
-#chatinputTA
+.chatTA
 {
     height: 100%;
     width: 395px;

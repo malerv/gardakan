@@ -3,17 +3,23 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css" />
+    <script language="javascript" type="text/javascript" src="chat_client.js" ></script>
+    
+    <form id="inputMessageForm" action="input_chat_message.html" method="post">
+        <input type="hidden" id="userName" value=""></input>
+    </form>
 </head>
 <body>
 
-    <div id="chatdiv">
-        <div id="messagesContainer">
+    <div class="chatdiv">
+        <div class="messagesContainer">
             <div class="chatmessage">allo</div>
             <div class="chatmessage">ta mère :D</div>
             <div class="chatmessage">8====D</div>
         </div>
-        <div id="chatinputdiv">
-            <textarea id="chatinputTA"></textarea>
+        <div class="chatinputdiv">
+            <textarea id="chatinputTA" class="chatTA"
+            onkeyup="if(event.keyCode==13 && !event.shiftKey){ enterMessage('chatinputTA');}"></textarea>
         </div>
     </div>
 
