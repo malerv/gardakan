@@ -12,7 +12,6 @@ def AddEvents(events):
         DjanEvent = Event(
                           Name=event['TITRE'],
                           Description=event['DESCRIP'],
-                          ImagePath=event['URL_PHOTO'],
                           DateTime=event['DT01'],
                           Category=event['CATEG'],
                           Adress=event['AD'],
@@ -53,6 +52,15 @@ def FillDB():
     AddHockeyEvents()
     AddPoolEvents()
     AddSherbrookeEvents()
+    
+    
+def main():
+    # my code here
+    FillDB()
+    pass
+    
+if __name__ == "__main__":
+    main()
 
     
     
