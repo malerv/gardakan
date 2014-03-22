@@ -2,20 +2,20 @@ import math
 
 
 def getLatFromStrPoint(strPoint):
-	strPoint = strPoint.split("(")[1]
-	return float(strPoint.split(",")[0])
+    strPoint = strPoint.split("(")[1]
+    return float(strPoint.split(",")[0])
 
 def getLonFromStrPoint(strPoint):
-	strPoint = strPoint.split("(")[1]
-	strPoint = strPoint.split(",")[1]
-	return float(strPoint.split(")")[0])
+    strPoint = strPoint.split("(")[1]
+    strPoint = strPoint.split(",")[1]
+    return float(strPoint.split(")")[0])
 
 def getDistanceBetween(x1, y1, x2, y2):
 
-	# Convert latitude and longitude to 
+    # Convert latitude and longitude to 
     # spherical coordinates in radians.
     degrees_to_radians = math.pi/180.0
-	radOfEarth = 6371000
+    radOfEarth = 6371000
         
     # phi = 90 - latitude
     phi1 = (90.0 - lat1)*degrees_to_radians
