@@ -1,0 +1,77 @@
+
+{% extends "base.html" %}
+
+{% block mEvts%}active{% endblock %}
+{% block content%}
+
+<H1> Nom de l'evenement </H1>
+
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+          Description
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse">
+      <div class="panel-body">
+        La belle description
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+          Chat
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse in">
+      <div class="panel-body">
+        <p class="left"> Machin (16h30): test truc macha</p>
+        <p class="left"> Machin (16h30): test truc macha</p>
+        <p class="left mod"> Mod (16h30): hein hein</p>
+        <p class="right"> Moi    (16h35): Ouah cool</p>
+        <p class="left toMe"> Machin (16h30): @moi truc truc machin</p>
+        <p class="right"> Moi    (16h35): Ouah cool</p>
+        <p class="left mod toMe"> Mod (16h30): @moi hein hein</p>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+          Service
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse">
+      <div class="panel-body">
+        <p>Machin propose a (18h25): covoiturage 2$ Lennox depart dans 4min</p>
+        <p class = "right"><button type="button" class="btn btn-default btn"><span class="glyphicon glyphicon-plus"></span> Ajouter un service</button></p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+          Carte
+        </a>
+      </h4>
+    </div>
+    <div id="collapseFour" class="panel-collapse collapse">
+      <div class="panel-body">
+        La belle carte
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
