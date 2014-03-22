@@ -14,7 +14,6 @@ class Event(models.Model):
     
     City = models.ForeignKey('City')
     
-    
 
 class RecurrentEvent(models.Model):
     Name = models.CharField(max_length=255)
