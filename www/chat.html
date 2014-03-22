@@ -7,23 +7,32 @@
     
     <form id="inputMessageForm" action="input_chat_message.html" method="post">
         <input type="hidden" id="userName" value="Anon"></input>
+        <input type="hidden" id="chatid" value="test"></input>
     </form>
 </head>
 <body>
-
-    <div class="chatdiv">
-        <div class="messagesContainer" id="chatMessagesdiv_1">
-            <!-- HTML of messages goes in that div -->
+    <div class="globalChatDiv">
+        <div class="chatHeaderDiv">
+            <strong><span>Chat de test</span></strong>
         </div>
-        <div class="chatinputdiv">
-            <textarea id="chatinputTA" class="chatTA"
-            onkeyup="if(event.keyCode==13 && !event.shiftKey){ enterMessage('chatinputTA');}"></textarea>
+        
+        <div class="chatdiv">
+            <div class="messagesContainer" id="chatMessagesdiv_1">
+                <!-- HTML of messages goes in that div -->
+            </div>
             
-            <div class="sendbtndiv">
-                <button class="sendbtn"  onclick="enterMessage('chatinputTA');">Envoyer</button>
+            <div class="chatinputdiv">
+                <textarea id="chatinputTA" class="chatTA"
+                onkeyup="if(event.keyCode==13 && !event.shiftKey){ enterMessage('chatinputTA');}"></textarea>
+                
+                <div class="sendbtndiv">
+                    <button class="sendbtn"  onclick="enterMessage('chatinputTA');">Envoyer</button>
+                </div>
             </div>
         </div>
     </div>
 
 </body>
 </html>
+
+

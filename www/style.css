@@ -4,6 +4,26 @@
     overflow-x: hidden;
 }
 
+.globalChatDiv
+{
+    border:0px;
+    margin:0px;
+    padding:0px;
+    width:405px;
+}
+
+.chatHeaderDiv
+{
+    width:100%; /*Same as #chatinput.width*/
+    height:50px;
+    border:0px;
+    padding:0px;
+    margin:0px;
+    background-color:#5355E0;
+    color:#FFFFFF;
+    text-align:center;
+}
+
 .chatdiv
 { 
     overflow-y:scroll;
@@ -24,7 +44,7 @@
 
 .chatmessage
 {
-    overflow-y:scroll;
+    white-space: pre-wrap;
     min-height:50px;
     height: auto;
     width: 100%;
