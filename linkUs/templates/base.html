@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load staticfiles %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Kevin Albert">
+    <link rel="shortcut icon" href="{% static "assets/Medicalwp-Medical-Microscope.ico" %}">
+
+    <title>{% block title %}Labo{% endblock title %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static "linkus.css"%}" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Evenement <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li class="dropdown-header">Evenement proche</li>
+                <li><a href="#">Proche 1</a></li>
+                <li><a href="#">Proche 2</a></li>
+                <li><a href="#">Proche 3</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Evenement selectione</li>
+                <li><a href="#">Evenement 1</a></li>
+                <li><a href="#">Evenement 2</a></li>
+              </ul>
+            </li>
+            <li><a href="#contact">List des evenements</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Mon profile</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Cree un evenement</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="main">
+        {% block content%}
+            <p>YOU SHOULD NOT SEE</p>
+        {% endblock %}
+      </div>
+
+    </div><!-- /.container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
+    {% block extra_script %}
+    {% endblock extra_script %}
+</body>
+</html>
