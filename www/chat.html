@@ -5,9 +5,11 @@
     <link rel="stylesheet" href="style.css" />
     <script language="javascript" type="text/javascript" src="chat_client.js" ></script>
     
-    <form id="inputMessageForm" action="input_chat_message.html" method="post">
+    <form id="inputMessageForm" action="input_chat_message.html" method="post" target="blankIframe">
         <input type="hidden" id="userName" value="Anon"></input>
         <input type="hidden" id="chatid" value="test"></input>
+        <input type="hidden" id="textToSend"></input>
+        <input type="hidden" id="currentTime"></input>
     </form>
 </head>
 <body>
@@ -31,7 +33,7 @@
             </div>
         </div>
     </div>
-
+    <iframe id="blankIframe" height="0" width="0" style="display:none;" tabindex="-1"></iframe>
 </body>
 </html>
 
