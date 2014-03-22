@@ -1,5 +1,12 @@
-.chatdiv
+*
 {
+    float: left;
+    overflow-x: hidden;
+}
+
+.chatdiv
+{ 
+    overflow-y:scroll;
     height: 600px;
     width: 400px; /*Same as #chatinput*/
     border: 2px solid #a1a1a1;
@@ -15,25 +22,46 @@
     margin: 0px;
 }
 
+.chatmessage
+{
+    overflow-y:scroll;
+    min-height:50px;
+    height: auto;
+    width: 100%;
+    border-bottom: 2px solid;
+}
+
 .chatinputdiv
 {
     height: 46px;
     width: 400px; /*Same as #chatdiv*/
     border-top: 1px solid;
+    float: left;
 }
 
 .chatTA
 {
     height: 100%;
-    width: 395px;
+    width: 295px; /*chatinputdiv.width - 5 - sendbtn.width*/
     border: 0px;
     margin: 0px;
-    padding: 2px;
+    padding: 0px;
+    resize: none;
+}
+.sendbtndiv
+{
+    height:100%;
+    width: 100px;
+    border: 0px;
+    padding: 0px;
+    margin: 0px;
 }
 
-.chatmessage
+.sendbtn
 {
-    height: 46px;
-    width: 100%;
-    border-bottom: 2px solid;
+    width:100%;
+    height:100%;
+    padding:0px;
+    margin:0px;
 }
+
