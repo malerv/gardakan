@@ -1,0 +1,18 @@
+#chatdiv
+{
+    height: 600px;
+    width: 400px;
+    border: 2px solid #a1a1a1;
+}
+
+#chatinput
+{
+    
+}
+
+.chatmessage
+{
+    height: 46px;
+    width: 100%;
+    border-bottom: 2px solid;
+}
