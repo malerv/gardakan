@@ -9,8 +9,7 @@ class Event(models.Model):
     ImagePath = models.ImageField()
     DateTime = models.DateTimeField()
     Category = models.CharField(max_length=255)
-    CivicAdress = models.CharField(max_length=255)
-    StreetName = models.CharField(max_length=255)
+    Adress = models.CharField(max_length=255)
     Latitude = models.DecimalField()
     Longitude = models.DecimalField()
     
