@@ -10,7 +10,7 @@ def getLonFromStrPoint(strPoint):
     strPoint = strPoint.split(",")[1]
     return float(strPoint.split(")")[0])
 
-def getDistanceBetween(x1, y1, x2, y2):
+def getDistanceBetween(lat1, long1, lat2, long2):
 
     # Convert latitude and longitude to 
     # spherical coordinates in radians.
