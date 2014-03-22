@@ -8,7 +8,8 @@ import json
 import math
 from pprint import pprint
 from chatUs.models import Event, City
-from utils.geo  import  getLatFromStrPoint, getLonFromStrPoint, getDistanceBetween
+from utils.geo  import  getLatFromStrPoint, getLonFromStrPoint
+
 #from utils  import geo
 from operator import itemgetter
 
