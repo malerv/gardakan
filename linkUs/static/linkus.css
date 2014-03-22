@@ -30,3 +30,84 @@
     font-size : 120%;
     font-weight : bold;
 }
+
+.globalChatDiv
+{
+    border:0px;
+    margin:0px;
+    padding:0px;
+    width:405px;
+}
+
+.chatHeaderDiv
+{
+    width:100%; /*Same as #chatinput.width*/
+    height:50px;
+    border:0px;
+    padding:0px;
+    margin:0px;
+    background-color:#5355E0;
+    color:#FFFFFF;
+    text-align:center;
+}
+
+.chatdiv
+{ 
+    overflow-y:scroll;
+    height: 600px;
+    width: 400px; /*Same as #chatinput*/
+    border: 2px solid #a1a1a1;
+    margin: 0px;
+}
+
+.messagesContainer
+{
+    height: 550px;
+    width: 100%;
+    border: 0px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.chatmessage
+{
+    white-space: pre-wrap;
+    min-height:50px;
+    height: auto;
+    width: 100%;
+    border-bottom: 2px solid;
+}
+
+.chatinputdiv
+{
+    height: 46px;
+    width: 400px; /*Same as #chatdiv*/
+    border-top: 1px solid;
+    float: left;
+}
+
+.chatTA
+{
+    height: 100%;
+    width: 295px; /*chatinputdiv.width - 5 - sendbtn.width*/
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+    resize: none;
+}
+.sendbtndiv
+{
+    height:100%;
+    width: 100px;
+    border: 0px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.sendbtn
+{
+    width:100%;
+    height:100%;
+    padding:0px;
+    margin:0px;
+}

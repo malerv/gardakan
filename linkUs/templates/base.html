@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Kevin Albert">
-    <link rel="shortcut icon" href="{% static "assets/Medicalwp-Medical-Microscope.ico" %}">
+    <!-- <link rel="shortcut icon" href="{% static "assets/Medicalwp-Medical-Microscope.ico" %}">-->
 
     <title>{% block title %}LinkUs{% endblock title %}</title>
 
@@ -16,7 +16,7 @@
 
     <!-- Custom styles for this template -->
     <link href="{% static "linkus.css"%}" rel="stylesheet">
-
+    {% block extra_head %}{% endblock extra_head %}
   </head>
 
   <body>
@@ -46,7 +46,7 @@
                 <li><a href="{% url "event"%}">Evenement 2</a></li>
               </ul>
             </li>
-            <li><a href="{%url "event_list"%}" {% block mEvtsList%}{% endblock %}>List des evenements</a></li>
+            <li class = {% block mEvtsList%}{% endblock %}><a href="{%url "event_list"%}" >List des evenements</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown {% block mMenu%}{% endblock %}">
