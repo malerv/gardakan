@@ -7,7 +7,8 @@ Created on Mar 22, 2014
 import json
 from pprint import pprint
 from chatUs.models import Event, City
-from utils.geo  import getLatFromStrPoint, getLonFromStrPoint
+from utils.geo  import getLatFromStrPoint, getLonFromStrPoint, getDistanceBetween
+from operator import itemgetter
 
 
 
@@ -85,6 +86,21 @@ def FillDB():
    # AddHockeyEvents()
    # AddPoolEvents()
     print "FIN"
+    
+    
+def GetSortedEventList(UserLat,UserLon):
+    DjanEvents = Event.objects.all()
+    array = []
+    
+    for DjanEvent in DjanEvents:
+        dist = getDistanceBetween(DjanEvent.Latitude, DjanEvent.Longitude, UserLat, UserLon)
+        array.append([DjanEvent,dist])
+        
+    SortedList =sorted(array, key=itemgetter(1))
+    
+    return SortedList
+    
+    
     
 def main():
     # my code here
