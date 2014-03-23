@@ -2,84 +2,74 @@
 
  {% block mEvtsList%}active{% endblock %}
     {% block content%}
+    
     <h1>Liste des evenements</h1>
     <div class="left">
+    
+    
+    {% for ev in event %}
     <div>
-        <h2>Titre de l'event</h2>
+    
+        <h2>{{ev.0.Name}}</h2>
+        <h2>Distance: {{ev.1}} m</h2>
+             
+          <h4>
+        
+        
+
+        {% if ev.0.StartDate  %}
+        Date de debut: {{ev.0.StartDate}}
+        
+        
+        {% if ev.0.EndDate  %}
+         Date de fin: {{ev.0.EndDate}}
+        {% endif  %}
+        
+        
+        {% else %}
+        
+         {% if ev.0.WeekDay %}
+        Jour de la semaine: {{ev.0.WeekDay}}
+        {% endif  %}
+        
+        {% endif  %}
+        
+          </h4>
+        
+        
+        <h5>
+        
+        {% if ev.0.StartTime  %}
+        Heure de debut: {{ev.0.StartTime}}
+        {% endif  %}
+        
+        
+        {% if ev.0.EndTime  %}
+         Heure de fin: {{ev.0.EndTime}}
+        {% endif  %}
+        
+        
+        </h5>
+
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{forloop.counter}}">
                     Description
                  </a>
                 </h4>
              </div>
     
-            <div id="collapseThree" class="panel-collapse collapse">
+              <div id="collapse{{forloop.counter}}" class="panel-collapse collapse">
                 <div class="panel-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                {{ev.0.Description}}
                 </div>
             </div>
         </div>
-        <span>User1 : User2 : User3</span>
+        <!--  span>User1 : User2 : User3</span> -->
+    </div>
+    {% endfor %}
     </div>
     
-        <div>
-        <h2>Titre de l'event</h2>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                    Description
-                 </a>
-                </h4>
-             </div>
-    
-            <div id="collapseTwo" class="panel-collapse collapse">
-                <div class="panel-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                </div>
-            </div>
-        </div>
-        <span>User1 : User2 : User3</span>
-    </div>
-        <div>
-        <h2>Titre de l'event</h2>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                    Description
-                 </a>
-                </h4>
-             </div>
-    
-            <div id="collapseOne" class="panel-collapse collapse">
-                <div class="panel-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                </div>
-            </div>
-        </div>
-        <span>User1 : User2 : User3</span>
-    </div>
-        <div>
-        <h2>Titre de l'event</h2>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                    Description
-                 </a>
-                </h4>
-             </div>
-    
-            <div id="collapseThree" class="panel-collapse collapse">
-                <div class="panel-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                </div>
-            </div>
-        </div>
-        <span>User1 : User2 : User3</span>
-    </div>
-    </div>
+       
  {% endblock %}

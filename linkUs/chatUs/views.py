@@ -1,12 +1,14 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django import forms
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
+
 from chatUs.models import Event
-from utils.geo import getLatFromStrPoint, getLonFromStrPoint
+from utils.geo import getLatFromStrPoint, getLonFromStrPoint, appendToLog
+from chatUs import Util_DB
 # Create your views here.
 
 class LoginForm(forms.Form):
@@ -57,13 +59,32 @@ def login(request):
                               context_instance = RequestContext(request))
 
 def event(request, event_id):
+    appendToLog( 'event: ')
     event = get_object_or_404(Event, id=event_id)
-    return render(request, 'event.html', {
+ 
+    
+    return render_to_response('event.html',
+        {
         "event" : event,
-    })
+        },
+          context_instance = RequestContext(request) )           
+    
+    
+    
 
 def event_list(request):
-    return render(request, 'eventList.html', {})
+    
+    print request.session['latitude']
+    print request
+    event_list = Util_DB.GetSortedEventList(request.session['latitude'],request.session['longitude'])
+
+    
+    return render_to_response('eventlist.html',
+        {
+        "event" : event_list,
+        },
+          context_instance = RequestContext(request) )
+
 
 def create_event(request):
     if request.method == 'POST': # If the form has been submitted...
