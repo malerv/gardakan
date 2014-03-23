@@ -55,9 +55,9 @@ def AddEvents(events):
         
             if tAdress != None:
                 pass
-               # LatLonArray = getLatLonFromAddr(tAdress)
-                #tLatitude = LatLonArray[0]
-                #tLongitude = LatLonArray[1]
+                LatLonArray = getLatLonFromAddr(tAdress)
+                tLatitude = LatLonArray[0]
+                tLongitude = LatLonArray[1]
                  
             else:
                 IsOk = False
@@ -123,9 +123,9 @@ def AddSherbrookeEvents():
 
 def FillDB():
     print "DEBUT"
-    #AddSherbrookeEvents()
+    AddSherbrookeEvents()
    # AddLibraryEvents()
-    #AddHockeyEvents()
+    AddHockeyEvents()
    # AddPoolEvents()
     print "FIN"
     
