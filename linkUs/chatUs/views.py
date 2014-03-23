@@ -8,15 +8,17 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils import simplejson
 import socket
 
-from chatUs.models import Event
+from chatUs.models import Event, ChatLOG
 from utils.geo import getLatFromStrPoint, getLonFromStrPoint
 # Create your views here.
-def ajax(request):
+
+@csrf_exempt
+def input_message(request):
     uName = ""
     timeText = ""
     textToSend = ""
     
-    print(request.POST['text'])
+    print request.POST
     
     if request.POST.has_key("userName"):
         uName = request.POST["userName"]
@@ -25,7 +27,17 @@ def ajax(request):
     if request.POST.has_key("text"):
         textToSend = request.POST["text"]
     
-    return HttpResponse("{text:'salut!'}", mimetype="application/json")
+    #If there a name then a new message has been posted
+    if uName != ""
+        chatlog = ChatLOG(Event='1', User=uName, Text=textToSend, DateTime=timeText)
+        chatlog.save();
+    #Otherwise it is considered a request for the newest
+    #data, based on the timeText which will instead
+    #represent the time in since 1/1/1970
+    else
+        #TODO
+    
+    return HttpResponse("{'text':'salut!'}", mimetype="application/json")
 
 class LoginForm(forms.Form):
     """

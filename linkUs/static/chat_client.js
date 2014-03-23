@@ -34,13 +34,13 @@ function enterMessage(textID)
             dataType: "json",
             data : {
                 client_response : inputString,
-                csrfmiddlewaretoken: '{{ csrf_token }}',
             },
             success : function(json) {
                 console.log('Server response : ' + json.server_response);
             },
             error : function(xhr,errmsg,err) {
-                console.log("Error sending message");
+                console.log(xhr.status + "****: " + xhr.responseText);
+                console.log(errmsg);
             }
         });
         return false;
