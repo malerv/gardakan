@@ -1,4 +1,5 @@
 import math
+import requests
 
 
 def getLatFromStrPoint(strPoint):
@@ -35,8 +36,29 @@ def getDistanceBetween(lat1, long1, lat2, long2):
     
     cos = (math.sin(phi1)*math.sin(phi2)*math.cos(theta1 - theta2) + 
            math.cos(phi1)*math.cos(phi2))
-    arc = math.acos( cos )
+    arc = math.acos(cos)
 
     # Remember to multiply arc by the radius of the earth 
     # in your favorite set of units to get length.
     return arc*radOfEarth
+
+def getLatLonFromAddr(adress):
+    lat = 0.0
+    lng = 0.0
+    urlTest = 'https://maps.googleapis.com/maps/api/geocode/json?address'
+    first = True
+    for txt in adress.split(" "):
+        if first == True:
+            urlTest+='='
+            first = False
+        else:
+            urlTest+='+'
+        urlTest+=txt
+    urlTest+='&sensor=false'
+    r=requests.get(urlTest)
+    data = r.json()
+    if data['status']=="OK":
+        lat = data['results'][0]['geometry']['location']['lat']
+        lng = data['results'][0]['geometry']['location']['lng']
+
+    return [lat,lng]
