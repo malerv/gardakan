@@ -18,16 +18,58 @@
     <link href="{% static "linkus.css"%}" rel="stylesheet">
     {% block extra_head %}{% endblock extra_head %}
     
+    <script language="javascript" type="text/javascript" src="{% static "require.js" %}" ></script>
+    
     {% load socketio_tags %}
     {% socketio %}
     <script>
+        requirejs.config({baseUrl: '../static'});
+        requirejs(['io'],
+            function(io) {
+                io.configure(function (){
+                    io.set('authorization', function (handshakeData, callback) {
+                        // findDatabyip is an async example function
+                        findDatabyIP(handshakeData.address.address, function (err, data) {
+                        if (err) return callback(err);
+
+                        if (data.authorized) {
+                            handshakeData.foo = 'bar';
+                            for(var prop in data) handshakeData[prop] = data[prop];
+                            callback(null, true);
+                        } else {
+                            callback(null, false);
+                        }
+                        }) 
+                    });
+                    });
+            });
+    
+    
+        var io = require('socket.io').listen(80);
+
+        io.configure(function (){
+        io.set('authorization', function (handshakeData, callback) {
+            // findDatabyip is an async example function
+            findDatabyIP(handshakeData.address.address, function (err, data) {
+            if (err) return callback(err);
+
+            if (data.authorized) {
+                handshakeData.foo = 'bar';
+                for(var prop in data) handshakeData[prop] = data[prop];
+                callback(null, true);
+            } else {
+                callback(null, false);
+            }
+            }) 
+        });
+        });
+        
         var socket = new io.Socket();
         socket.connect();
         socket.on('connect', function() {
             socket.subscribe('my channel');
             console.log('Connected to socket');
         });
-        // etc TODO
     </script>
   </head>
 
