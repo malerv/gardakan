@@ -3,7 +3,7 @@ function enterMessage(textID)
     var textBox = document.getElementById(textID);
     var textHF = document.getElementById("textToSend");
     var currentTimeHF = document.getElementById("currentTime");
-    var sendTextForm = document.getElementById("inputMessageForm");
+    var sendTextForm = $('#inputMessageForm');
     var messageText = textBox.value;
     textBox.value = "";
     
@@ -18,7 +18,21 @@ function enterMessage(textID)
     
     textHF.value = messageText;
     currentTimeHF.value = new Date().getTime() / 1000;
-    sendTextForm.submit();
+    
+    sendTextForm.submit(function(event){
+        event.preventDefault();
+        
+        $.ajax({
+            type: "POST",
+            url: "/input_chat_message.html",
+            data: sendTextForm.serialize(),
+            success: function(response){
+                console.log(response);
+            }
+        });
+        console.log("fail");
+        return false;
+    });
 }
 
 function insertMessage(userID, message, containerID)

@@ -2,12 +2,15 @@ from django.shortcuts import render, get_object_or_404
 from django import forms
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
+from django.utils import simplejson
 
 from chatUs.models import Event
 from utils.geo import getLatFromStrPoint, getLonFromStrPoint
 # Create your views here.
+
+
 
 class LoginForm(forms.Form):
     """
