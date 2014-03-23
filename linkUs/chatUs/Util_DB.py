@@ -39,6 +39,8 @@ def AddEvents(events):
         tGeometry = event.get('GEOM')
         tWeekDay = event.get('JOUR_SEMAINE')
         tCost = event.get('CO')
+        tPhone = event.get('TEL1')
+        tEmail = event.get('CONTACT')
     
         
         if tAdress == None:
@@ -53,9 +55,9 @@ def AddEvents(events):
         
             if tAdress != None:
                 pass
-               # LatLonArray = getLatLonFromAddr(tAdress)
-                #tLatitude = LatLonArray[0]
-                #tLongitude = LatLonArray[1]
+                LatLonArray = getLatLonFromAddr(tAdress)
+                tLatitude = LatLonArray[0]
+                tLongitude = LatLonArray[1]
                  
             else:
                 IsOk = False
@@ -85,6 +87,8 @@ def AddEvents(events):
                               Latitude = tLatitude,
                               Longitude = tLongitude,
                               Cost = tCost,
+                              Phone = tPhone,
+                              Email = tEmail,
                               City = DjanCity
                               )
         
@@ -119,9 +123,9 @@ def AddSherbrookeEvents():
 
 def FillDB():
     print "DEBUT"
-    #AddSherbrookeEvents()
+    AddSherbrookeEvents()
    # AddLibraryEvents()
-    #AddHockeyEvents()
+    AddHockeyEvents()
    # AddPoolEvents()
     print "FIN"
     

@@ -18,16 +18,18 @@
 {% block mEvts%}active{% endblock %}
 {% block content%}
 <div class="left">
-<form>
+<form action="/create_event/" method="post">{% csrf_token %}
+{{ form.as_p }}
 	Nom de l'événements : <input type="text" name="titre"><br>
-	Date : <input type="date" name="date"><br>
+	Date début: <input type="date" name="dateDebut"><br>
+	Date fin: <input type="date" name="dateFin"><br>
 	Heure de début : <input type="time" name="heureDebut"><br>
 	Heure de fin : <input type="time" name="heureFin"><br>
 	Coût : <input type="number" name="cout"><br>
-	Contact(télépone) : <input type="telephone" name="email"><br>
+	Contact(télépone) : <input type="telephone" name="telephone"><br>
 	Contact(email) : <input type="email" name="email"><br>
 	Description : <input type="text" name="descript"><br>
-	Ville :  <input type="text" name="heureFin"><br> 
+	Ville :  <input type="text" name="ville"><br> 
 	<!-- Il faut aussi trouver le MUNID, j'ai un json pour faire ça déjà, v.g. -->
 	Addresse : <input type="text" name="address" id="address" > <br>
 	<input type="submit" value= "Créer l'événement" /> 

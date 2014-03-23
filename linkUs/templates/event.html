@@ -16,7 +16,7 @@
 {% block mEvts%}active{% endblock %}
 {% block content%}
 
-<H1> Nom de l'evenement </H1>
+<H1>  {{event.titre}} </H1>
 
 <div class="panel-group" id="accordion">
   <div class="panel panel-default">
@@ -29,9 +29,8 @@
     </div>
     <div id="collapseOne" class="panel-collapse collapse">
       <div class="panel-body">
-        La belle description
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
+        {{event.description}}
+        </div>
     </div>
   </div>
   
@@ -102,7 +101,31 @@
     </div>
     <div id="collapseFour" class="panel-collapse collapse">
       <div class="panel-body">
-        La belle carte
+        <div id="map" style="width: 400px; height: 300px;"></div>
+        <script type="text/javascript">
+	   //var address = document.getElementById('address').value;
+		var address = {{event.address}};
+	  
+		var map = new google.maps.Map(document.getElementById('map'), { 
+			mapTypeId: google.maps.MapTypeId.TERRAIN,
+			zoom: 80
+		});
+
+		var geocoder = new google.maps.Geocoder();
+
+		geocoder.geocode({
+			'address': address
+		}, function(results, status) {
+				if(status == google.maps.GeocoderStatus.OK) {
+					new google.maps.Marker({
+						position: results[0].geometry.location,
+						map: map
+				});
+		 map.setCenter(results[0].geometry.location);
+				}
+			});
+</script>
+        
       </div>
     </div>
   </div>
