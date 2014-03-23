@@ -37,13 +37,11 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Evenement <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li class="dropdown-header">Evenement proche</li>
-                <li><a href="{% url "event" 12%}">{{event.Name}}</a></li>
-                <li><a href="{% url "event" 1%}">{{event.Name}}</a></li>
-                <li><a href="{% url "event" 8%}">{{event.Name}}</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Evenement selectione</li>
-                <li><a href="{% url "event" 1%}">Evenement 1</a></li>
-                <li><a href="{% url "event" 1%}">Evenement 2</a></li>
+                
+                {% for ev in topThree %}
+                <li><a href="{% url "event" ev.0.id%}">{{ev.0.Name}}</a></li>
+                {% endfor %}
+                
               </ul>
             </li>
             <li class = {% block mEvtsList%}{% endblock %}><a href="{%url "event_list"%}" >List des evenements</a></li>

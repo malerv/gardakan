@@ -61,11 +61,15 @@ def login(request):
 def event(request, event_id):
     appendToLog( 'event: ')
     event = get_object_or_404(Event, id=event_id)
- 
+    topThree = Util_DB.GetSortedEventList(request.session['latitude'],request.session['longitude'])[0:3]
+    
+    
+    
     
     return render_to_response('event.html',
         {
         "event" : event,
+        "topThree" : topThree,
         },
           context_instance = RequestContext(request) )           
     
@@ -77,15 +81,18 @@ def event_list(request):
     print request.session['latitude']
     print request
     event_list = Util_DB.GetSortedEventList(request.session['latitude'],request.session['longitude'])
+    topThree = event_list[0:3]
     
     return render_to_response('eventlist.html',
         {
-        "event" : event_list,
+        "events" : event_list,
+        "topThree" : topThree,
         },
           context_instance = RequestContext(request) )
 
 
 def create_event(request):
+    topThree = Util_DB.GetSortedEventList(request.session['latitude'],request.session['longitude'])[0:3]
     if request.method == 'POST': # If the form has been submitted...
         form = CreateEventForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
@@ -116,10 +123,13 @@ def create_event(request):
            # return HttpResponseRedirect('/thanks/') # Redirect after POST
         else:
             form = CreateEventForm() # An unbound form
-
-    return render(request, 'createEvent.html', {
+    
+    return render_to_response('createEvent.html',
+        {
         'form': form,
-    })
+        "topThree" : topThree,
+        },
+          context_instance = RequestContext(request) )
 
 @csrf_exempt
 def receive_coord(request):
