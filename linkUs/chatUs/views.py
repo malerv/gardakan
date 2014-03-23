@@ -31,3 +31,6 @@ def event(request):
 
 def event_list(request):
     return render(request, 'eventList.html', {})
+
+def create_event(request):
+    return render(request, 'createEvent.html', {})
