@@ -26,11 +26,14 @@ function insertMessage(userID, message, containerID)
     var user = document.getElementById(userID).value;
     var mycontainer = document.getElementById(containerID);
     var newMessage = '';
+    var today = new Date();
+    var hours=today.getHours();
+    var minutes=today.getMinutes();
     
-    newMessage += '<div class="chatmessage">';
+    newMessage += '<p class="left">';
     newMessage += '<strong><span>' + user + ': </span>&nbsp;</strong>';
-    newMessage += '<span>' + message + '</span>';
-    newMessage += '</div>';
+    newMessage += '(' + hours + 'h' + minutes + '):&nbsp;';
+    newMessage += '<span>' + message + '</span></p>';
     
     mycontainer.innerHTML += newMessage;
 }

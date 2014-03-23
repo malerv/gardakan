@@ -2,10 +2,9 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block extra_head%}
-    <meta charset="utf-8">
     <script language="javascript" type="text/javascript" src="{% static "chat_client.js" %}" ></script>
     
-    <form id="inputMessageForm" action="input_chat_message.html" method="post" target="blankIframe">
+    <form id="inputMessageForm" action="input_chat_message.html" method="POST" target="blankIframe">
         <input type="hidden" id="userName" value="Anon"></input>
         <input type="hidden" id="chatid" value="test"></input>
         <input type="hidden" id="textToSend"></input>
@@ -44,35 +43,14 @@
       </h4>
     </div>
     <div id="collapseTwo" class="panel-collapse collapse in">
-      <div class="panel-body">
-        <p class="left"> Machin (16h30): test truc macha</p>
-        <p class="left"> Machin (16h30): test truc macha</p>
-        <p class="left mod"> Mod (16h30): hein hein</p>
-        <p class="right"> Moi    (16h35): Ouah cool</p>
-        <p class="left toMe"> Machin (16h30): @moi truc truc machin</p>
-        <p class="right"> Moi    (16h35): Ouah cool</p>
-        <p class="left mod toMe"> Mod (16h30): @moi hein hein</p>
+      <div class="panel-body" id="chatMessagesdiv_1">
+        <!-- HTML of messages goes in that div -->
       </div>
-      <div class="globalChatDiv">
-        <div class="chatHeaderDiv">
-            <strong><span>Chat de test</span></strong>
-        </div>
-        
-        <div class="chatdiv">
-            <div class="messagesContainer" id="chatMessagesdiv_1">
-                <!-- HTML of messages goes in that div -->
-            </div>
-            
-            <div class="chatinputdiv">
-                <textarea id="chatinputTA" class="chatTA"
-                onkeyup="if(event.keyCode==13 && !event.shiftKey){ enterMessage('chatinputTA');}"></textarea>
-                
-                <div class="sendbtndiv">
-                    <button class="sendbtn"  onclick="enterMessage('chatinputTA');">Envoyer</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <textarea id="chatinputTA" class="chatTA"
+    onkeyup="if(event.keyCode==13 && !event.shiftKey){ enterMessage('chatinputTA');}"></textarea>
+    
+    <button class="sendbtn"  onclick="enterMessage('chatinputTA');">Envoyer</button>
+
     <iframe id="blankIframe" height="0" width="0" style="display:none;" tabindex="-1"></iframe>
     </div>
   </div>
