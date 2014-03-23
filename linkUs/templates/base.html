@@ -7,16 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Kevin Albert">
-    <link rel="shortcut icon" href="{% static "assets/Medicalwp-Medical-Microscope.ico" %}">
+    <!-- <link rel="shortcut icon" href="{% static "assets/Medicalwp-Medical-Microscope.ico" %}">-->
 
-    <title>{% block title %}Labo{% endblock title %}</title>
+    <title>{% block title %}LinkUs{% endblock title %}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="{% static "linkus.css"%}" rel="stylesheet">
-
+    {% block extra_head %}{% endblock extra_head %}
   </head>
 
   <body>
@@ -33,23 +33,23 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="dropdown">
+            <li class="dropdown {% block mEvts%}{% endblock %}">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Evenement <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li class="dropdown-header">Evenement proche</li>
-                <li><a href="#">Proche 1</a></li>
-                <li><a href="#">Proche 2</a></li>
-                <li><a href="#">Proche 3</a></li>
+                <li><a href="{% url "event"%}">Proche 1</a></li>
+                <li><a href="{% url "event"%}">Proche 2</a></li>
+                <li><a href="{% url "event"%}">Proche 3</a></li>
                 <li class="divider"></li>
                 <li class="dropdown-header">Evenement selectione</li>
-                <li><a href="#">Evenement 1</a></li>
-                <li><a href="#">Evenement 2</a></li>
+                <li><a href="{% url "event"%}">Evenement 1</a></li>
+                <li><a href="{% url "event"%}">Evenement 2</a></li>
               </ul>
             </li>
-            <li><a href="#contact">List des evenements</a></li>
+            <li class = {% block mEvtsList%}{% endblock %}><a href="{%url "event_list"%}" >List des evenements</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
+            <li class="dropdown {% block mMenu%}{% endblock %}">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="#">Mon profile</a></li>
@@ -63,7 +63,6 @@
     </div>
 
     <div class="container">
-
       <div class="main">
         {% block content%}
             <p>YOU SHOULD NOT SEE</p>
