@@ -49,14 +49,7 @@
             <li class = {% block mEvtsList%}{% endblock %}><a href="{%url "event_list"%}" >List des evenements</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown {% block mMenu%}{% endblock %}">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Mon profile</a></li>
-                <li class="divider"></li>
-                <li><a href="#">Cree un evenement</a></li>
-              </ul>
-            </li>
+            <li class = {% block mCreate%}{% endblock %}><a href="{%url "create_event"%}" >Creer un evenement</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -90,8 +83,7 @@ if (navigator.geolocation) {
             }
         });
     });
-}
-     
+}     
     </script>
     {% endif %}
     {% block extra_script %}
