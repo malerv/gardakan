@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django import forms
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 class LoginForm(forms.Form):
@@ -18,7 +20,7 @@ def login(request):
     message = None
     form = None
     if request.method == 'POST':
-    
+
         if request.session.test_cookie_worked():
             request.session.delete_test_cookie()
             form = LoginForm(request.POST) 
@@ -47,3 +49,10 @@ def event_list(request):
 
 def create_event(request):
     return render(request, 'createEvent.html', {})
+
+@csrf_exempt
+def receive_coord(request):
+    request.session['latitude'] = request.POST['x']
+    request.session['longitude'] = request.POST['y']
+
+    return  HttpResponse()
