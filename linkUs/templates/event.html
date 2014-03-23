@@ -16,7 +16,7 @@
 {% block mEvts%}active{% endblock %}
 {% block content%}
 
-<H1>  {{event.titre}} </H1>
+<H1>  {{event.Name}} </H1>
 
 <div class="panel-group" id="accordion">
   <div class="panel panel-default">
@@ -29,7 +29,7 @@
     </div>
     <div id="collapseOne" class="panel-collapse collapse">
       <div class="panel-body">
-        {{event.description}}
+        {{event.Description}}
         </div>
     </div>
   </div>
@@ -104,7 +104,7 @@
         <div id="map" style="width: 400px; height: 300px;"></div>
         <script type="text/javascript">
 	   //var address = document.getElementById('address').value;
-		var address = {{event.address}};
+		var address = {{event.Adress}};
 	  
 		var map = new google.maps.Map(document.getElementById('map'), { 
 			mapTypeId: google.maps.MapTypeId.TERRAIN,
