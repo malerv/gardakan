@@ -16,4 +16,5 @@ urlpatterns = patterns('',
     url(r'^eventList.html$', views.event_list, name='event_list'),
     url(r'^send_coord.html$', views.receive_coord, name='send_coord'),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^input_message$', views.input_message, name='input_message'),
 )
