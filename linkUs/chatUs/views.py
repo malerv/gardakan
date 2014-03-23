@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django import forms
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -56,10 +56,11 @@ def login(request):
                               },
                               context_instance = RequestContext(request))
 
-def event(id,request):
-     return render(request, 'event.html', {
-          "event" : event.getObject_or_404(),
-      })
+def event(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+    return render(request, 'event.html', {
+        "event" : event,
+    })
 
 def event_list(request):
     return render(request, 'eventList.html', {})
