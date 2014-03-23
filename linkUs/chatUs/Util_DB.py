@@ -69,7 +69,7 @@ def AddEvents(events):
             
         if IsOk:
         
-            DjanCity, fuckOff = City.objects.get_or_create(Name = tCityName, MunID = tMunID)
+            DjanCity, UnBool = City.objects.get_or_create(Name = tCityName, MunID = tMunID)
 
 
             DjanEvent = Event(

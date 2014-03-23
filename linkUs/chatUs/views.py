@@ -83,7 +83,7 @@ def event_list(request):
     event_list = Util_DB.GetSortedEventList(request.session['latitude'],request.session['longitude'])
     topThree = event_list[0:3]
     
-    return render_to_response('eventlist.html',
+    return render_to_response('eventList.html',
         {
         "events" : event_list,
         "topThree" : topThree,
