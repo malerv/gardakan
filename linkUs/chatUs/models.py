@@ -13,8 +13,10 @@ class Event(models.Model):
     WeekDay = models.CharField(max_length=255,null=True)
     Category = models.CharField(max_length=255,null=True)
     Adress = models.CharField(max_length=255,null=True)
+    Cost = models.DecimalField(max_digits=19, decimal_places=2)
     Latitude = models.DecimalField(max_digits=19, decimal_places=16)
     Longitude = models.DecimalField(max_digits=19, decimal_places=16)
+    
     
     City = models.ForeignKey('City')
     
