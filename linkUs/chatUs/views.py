@@ -53,8 +53,10 @@ def login(request):
                               },
                               context_instance = RequestContext(request))
 
-def event(request):
-    return render(request, 'event.html', {})
+def event(id,request):
+     return render(request, 'event.html', {
+          "event" : event.getObject_or_404(),
+      })
 
 def event_list(request):
     return render(request, 'eventList.html', {})
