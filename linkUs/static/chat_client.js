@@ -5,7 +5,11 @@ function enterMessage(textID)
     var currentTimeHF = document.getElementById("currentTime");
     var sendTextForm = $('#inputMessageForm');
     var messageText = textBox.value;
+    var uName = document.getElementById("userName").value;
     textBox.value = "";
+    var today = new Date();
+    var hours=today.getHours();
+    var minutes=today.getMinutes();
     
     if(messageText != null && messageText.trim() != "" && messageText.length <= 255)
     {
@@ -19,18 +23,26 @@ function enterMessage(textID)
     textHF.value = messageText;
     currentTimeHF.value = new Date().getTime() / 1000;
     
-    sendTextForm.submit(function(event){
-        event.preventDefault();
-        
+    var inputString = "{ userName:'" + uName +"',";
+        inputString += "time:'" + hours + "h" + minutes + "',";
+        inputString += "text:'" + messageText + "'}";
+    
+    $(document).ready(function(){
         $.ajax({
-            type: "POST",
-            url: "/input_chat_message.html",
-            data: sendTextForm.serialize(),
-            success: function(response){
-                console.log(response);
+            url : "/input_message",
+            type : "POST",
+            dataType: "json",
+            data : {
+                client_response : inputString,
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+            },
+            success : function(json) {
+                console.log('Server response : ' + json.server_response);
+            },
+            error : function(xhr,errmsg,err) {
+                console.log("Error sending message");
             }
         });
-        console.log("fail");
         return false;
     });
 }

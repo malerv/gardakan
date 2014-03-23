@@ -3,14 +3,29 @@ from django import forms
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseRedirect
+from django.http import *
 from django.views.decorators.csrf import csrf_exempt
 from django.utils import simplejson
+import socket
 
 from chatUs.models import Event
 from utils.geo import getLatFromStrPoint, getLonFromStrPoint
 # Create your views here.
-
-
+def ajax(request):
+    uName = ""
+    timeText = ""
+    textToSend = ""
+    
+    print(request.POST['text'])
+    
+    if request.POST.has_key("userName"):
+        uName = request.POST["userName"]
+    if request.POST.has_key("time"):
+        timeText = request.POST["time"]
+    if request.POST.has_key("text"):
+        textToSend = request.POST["text"]
+    
+    return HttpResponse("{text:'salut!'}", mimetype="application/json")
 
 class LoginForm(forms.Form):
     """
