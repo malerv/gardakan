@@ -1,5 +1,5 @@
 import math
-import requests
+from requests import api
 
 
 def getLatFromStrPoint(strPoint):
@@ -53,7 +53,7 @@ def getLatLonFromAddr(adress):
             urlTest+='+'
         urlTest+=txt
     urlTest+='&sensor=false'
-    r=requests.get(urlTest)
+    r=api.get(urlTest)
     data = r.json()
     if data['status']=="OK":
         lat = data['results'][0]['geometry']['location']['lat']
