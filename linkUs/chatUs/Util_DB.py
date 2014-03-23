@@ -38,6 +38,9 @@ def AddEvents(events):
         tMunID = event.get('MUNID')
         tGeometry = event.get('GEOM')
         tWeekDay = event.get('JOUR_SEMAINE')
+        tCost = event.get('CO')
+        tPhone = event.get('TEL1')
+        tEmail = event.get('CONTACT')
     
         
         if tAdress == None:
@@ -51,6 +54,7 @@ def AddEvents(events):
         if tGeometry == None:
         
             if tAdress != None:
+                pass
                 LatLonArray = getLatLonFromAddr(tAdress)
                 tLatitude = LatLonArray[0]
                 tLongitude = LatLonArray[1]
@@ -65,7 +69,7 @@ def AddEvents(events):
             
         if IsOk:
         
-            DjanCity, fuckOff = City.objects.get_or_create(Name = tCityName, MunID = tMunID)
+            DjanCity, UnBool = City.objects.get_or_create(Name = tCityName, MunID = tMunID)
 
 
             DjanEvent = Event(
@@ -82,6 +86,9 @@ def AddEvents(events):
                               Adress = tAdress,
                               Latitude = tLatitude,
                               Longitude = tLongitude,
+                              Cost = tCost,
+                              Phone = tPhone,
+                              Email = tEmail,
                               City = DjanCity
                               )
         
@@ -116,10 +123,10 @@ def AddSherbrookeEvents():
 
 def FillDB():
     print "DEBUT"
-    AddSherbrookeEvents()
+    #AddSherbrookeEvents()
    # AddLibraryEvents()
-    AddHockeyEvents()
-    #AddPoolEvents()
+   # AddHockeyEvents()
+   # AddPoolEvents()
     print "FIN"
     
     
@@ -137,10 +144,15 @@ def GetSortedEventList(UserLat,UserLon):
         #print UserLon
         
         dist = getDistanceBetween(DjanEvent.Latitude, DjanEvent.Longitude, UserLat, UserLon)
-        print dist
-        array.append([DjanEvent,dist])
+        
+        array.append([DjanEvent,int(dist)])
         
     SortedList = sorted(array, key=itemgetter(1))
+   # array2 = []
+    
+    #for item in SortedList:
+     #   array2.append(item[0])
+      #  print item[0]
     
     return SortedList
     

@@ -2,21 +2,24 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block extra_head%}
-    <meta charset="utf-8">
-    <script language="javascript" type="text/javascript" src="{% static "chat_client.js" %}" ></script>
     
-    <form id="inputMessageForm" action="input_chat_message.html" method="post" target="blankIframe">
-        <input type="hidden" id="userName" value="Anon"></input>
-        <input type="hidden" id="chatid" value="test"></input>
+    <form method="POST" name="enterText">
+        {% if request.session.username %}
+        <input type="hidden" id="userName" value="{{request.session.username}}"></input>
+        {% else %}
+        <input type="hidden" id="userName" value="Anonyme"></input>
+        {% endif %}
+        <input type="hidden" id="chatid" value="{{event.id}}"></input>
         <input type="hidden" id="textToSend"></input>
         <input type="hidden" id="currentTime"></input>
+        {% csrf_token %}
     </form>
 {% endblock extra_head%}
 
 {% block mEvts%}active{% endblock %}
 {% block content%}
 
-<H1> Nom de l'evenement </H1>
+<H1>  {{event.Name}} </H1>
 
 <div class="panel-group" id="accordion">
   <div class="panel panel-default">
@@ -29,9 +32,8 @@
     </div>
     <div id="collapseOne" class="panel-collapse collapse">
       <div class="panel-body">
-        La belle description
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
+        {{event.Description}}
+        </div>
     </div>
   </div>
   
@@ -44,35 +46,14 @@
       </h4>
     </div>
     <div id="collapseTwo" class="panel-collapse collapse in">
-      <div class="panel-body">
-        <p class="left"> Machin (16h30): test truc macha</p>
-        <p class="left"> Machin (16h30): test truc macha</p>
-        <p class="left mod"> Mod (16h30): hein hein</p>
-        <p class="right"> Moi    (16h35): Ouah cool</p>
-        <p class="left toMe"> Machin (16h30): @moi truc truc machin</p>
-        <p class="right"> Moi    (16h35): Ouah cool</p>
-        <p class="left mod toMe"> Mod (16h30): @moi hein hein</p>
+      <div class="panel-body" id="chatMessagesdiv_1">
+        <!-- HTML of messages goes in that div -->
       </div>
-      <div class="globalChatDiv">
-        <div class="chatHeaderDiv">
-            <strong><span>Chat de test</span></strong>
-        </div>
-        
-        <div class="chatdiv">
-            <div class="messagesContainer" id="chatMessagesdiv_1">
-                <!-- HTML of messages goes in that div -->
-            </div>
-            
-            <div class="chatinputdiv">
-                <textarea id="chatinputTA" class="chatTA"
-                onkeyup="if(event.keyCode==13 && !event.shiftKey){ enterMessage('chatinputTA');}"></textarea>
-                
-                <div class="sendbtndiv">
-                    <button class="sendbtn"  onclick="enterMessage('chatinputTA');">Envoyer</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <textarea id="chatinputTA" class="chatTA"
+    onkeyup="if(event.keyCode==13 && !event.shiftKey){ enterMessage('chatinputTA');}"></textarea>
+    
+    <button class="sendbtn"  onclick="enterMessage('chatinputTA');">Envoyer</button>
+
     <iframe id="blankIframe" height="0" width="0" style="display:none;" tabindex="-1"></iframe>
     </div>
   </div>
@@ -102,9 +83,36 @@
     </div>
     <div id="collapseFour" class="panel-collapse collapse">
       <div class="panel-body">
-        La belle carte
+        <div id="map" style="width: 400px; height: 300px;"></div>
+        <script type="text/javascript">
+	   //var address = document.getElementById('address').value;
+		/*var address = {{event.Adress}};
+	  
+		var map = new google.maps.Map(document.getElementById('map'), { 
+			mapTypeId: google.maps.MapTypeId.TERRAIN,
+			zoom: 80
+		});
+
+		var geocoder = new google.maps.Geocoder();
+
+		geocoder.geocode({
+			'address': address
+		}, function(results, status) {
+				if(status == google.maps.GeocoderStatus.OK) {
+					new google.maps.Marker({
+						position: results[0].geometry.location,
+						map: map
+				});
+		 map.setCenter(results[0].geometry.location);
+				}
+			});*/
+</script>
+        
       </div>
     </div>
   </div>
 </div>
+{% endblock %}
+{% block extra_script %}
+<script language="javascript" type="text/javascript" src="{% static "chat_client.js" %}" ></script>
 {% endblock %}

@@ -17,6 +17,7 @@
     <!-- Custom styles for this template -->
     <link href="{% static "linkus.css"%}" rel="stylesheet">
     {% block extra_head %}{% endblock extra_head %}
+    
   </head>
 
   <body>
@@ -37,26 +38,17 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Evenement <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li class="dropdown-header">Evenement proche</li>
-                <li><a href="{% url "event"%}">Proche 1</a></li>
-                <li><a href="{% url "event"%}">Proche 2</a></li>
-                <li><a href="{% url "event"%}">Proche 3</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Evenement selectione</li>
-                <li><a href="{% url "event"%}">Evenement 1</a></li>
-                <li><a href="{% url "event"%}">Evenement 2</a></li>
+                
+                {% for ev in topThree %}
+                <li><a href="{% url "event" ev.0.id%}">{{ev.0.Name}}</a></li>
+                {% endfor %}
+                
               </ul>
             </li>
             <li class = {% block mEvtsList%}{% endblock %}><a href="{%url "event_list"%}" >List des evenements</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown {% block mMenu%}{% endblock %}">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Mon profile</a></li>
-                <li class="divider"></li>
-                <li><a href="#">Cree un evenement</a></li>
-              </ul>
-            </li>
+            <li class = {% block mCreate%}{% endblock %}><a href="{%url "create_event"%}" >Creer un evenement</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -76,6 +68,23 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
+    
+    {% if request.session.username %}
+    <script>
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+        $.ajax({
+            type: "POST",
+            url: "{%url "send_coord"%}",
+            data: {
+                x: position.coords.latitude,
+                y: position.coords.longitude
+            }
+        });
+    });
+}     
+    </script>
+    {% endif %}
     {% block extra_script %}
     {% endblock extra_script %}
 </body>

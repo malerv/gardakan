@@ -17,6 +17,8 @@
 .panel-body
 {
     text-align : left;
+    height:300px;
+    overflow-y: scroll;
 }
 
 .toMe
@@ -33,6 +35,7 @@
 
 .globalChatDiv
 {
+    float:left;
     border:0px;
     margin:0px;
     padding:0px;
@@ -80,33 +83,24 @@
 
 .chatinputdiv
 {
-    height: 46px;
-    width: 400px; /*Same as #chatdiv*/
-    border-top: 1px solid;
+    height: 60px;
+    width: 688px;
     float: left;
 }
 
 .chatTA
 {
-    height: 100%;
-    width: 295px; /*chatinputdiv.width - 5 - sendbtn.width*/
-    border: 0px;
+    height: 60px;
+    width: 680px; /*chatinputdiv.width - 5 - sendbtn.width*/
+    border: 1px solid #FFA74F;
     margin: 0px;
     padding: 0px;
     resize: none;
 }
-.sendbtndiv
-{
-    height:100%;
-    width: 100px;
-    border: 0px;
-    padding: 0px;
-    margin: 0px;
-}
 
 .sendbtn
 {
-    width:100%;
+    width:auto;
     height:100%;
     padding:0px;
     margin:0px;
