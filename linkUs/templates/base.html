@@ -91,13 +91,13 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Evenement <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li class="dropdown-header">Evenement proche</li>
-                <li><a href="{% url "event"%}">Proche 1</a></li>
-                <li><a href="{% url "event"%}">Proche 2</a></li>
-                <li><a href="{% url "event"%}">Proche 3</a></li>
+                <li><a href="{% url "event" 1%}">Proche 1</a></li>
+                <li><a href="{% url "event" 1%}">Proche 2</a></li>
+                <li><a href="{% url "event" 1%}">Proche 3</a></li>
                 <li class="divider"></li>
                 <li class="dropdown-header">Evenement selectione</li>
-                <li><a href="{% url "event"%}">Evenement 1</a></li>
-                <li><a href="{% url "event"%}">Evenement 2</a></li>
+                <li><a href="{% url "event" 1%}">Evenement 1</a></li>
+                <li><a href="{% url "event" 1%}">Evenement 2</a></li>
               </ul>
             </li>
             <li class = {% block mEvtsList%}{% endblock %}><a href="{%url "event_list"%}" >List des evenements</a></li>
@@ -130,6 +130,24 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
+    
+    {% if request.session.username %}
+    <script>
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+        $.ajax({
+            type: "POST",
+            url: "{%url "send_coord"%}",
+            data: {
+                x: position.coords.latitude,
+                y: position.coords.longitude
+            }
+        });
+    });
+}
+     
+    </script>
+    {% endif %}
     {% block extra_script %}
     {% endblock extra_script %}
 </body>
