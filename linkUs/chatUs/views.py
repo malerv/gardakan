@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django import forms
+from django.shortcuts import render_to_response
+from django.template import RequestContext
 # Create your views here.
 
 class LoginForm(forms.Form):
@@ -13,18 +15,29 @@ def login(request):
     """
     Fonction idantifiant les gens et/ou renvoyant le formulaire.
     """
-    if request.method == 'POST': # If the form has been submitted...
-        form = LoginForm(request.POST) # A form bound to the POST data
-        if form.is_valid(): # All validation rules pass
-            #TODO check si c'est valide et unique en ce moment.
-            pass
+    message = None
+    form = None
+    if request.method == 'POST':
+    
+        if request.session.test_cookie_worked():
+            request.session.delete_test_cookie()
+            form = LoginForm(request.POST) 
+            if form.is_valid(): 
+                request.session['username'] = form.cleaned_data['username']
+            
+        else:
+            message = "Please enable cookies and try again."
     else:
-        form = LoginForm() # An unbound form
+        form = LoginForm()
 
-    return render(request, 'index.html', {
-        'form': form,
-    })
-
+    request.session.set_test_cookie()
+    
+    return render_to_response('index.html',
+                              {
+                                'form': form,
+                                'message':message,
+                              },
+                              context_instance = RequestContext(request))
 
 def event(request):
     return render(request, 'event.html', {})
