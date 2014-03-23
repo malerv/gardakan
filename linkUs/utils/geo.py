@@ -60,3 +60,9 @@ def getLatLonFromAddr(adress):
         lng = data['results'][0]['geometry']['location']['lng']
 
     return [lat,lng]
+
+
+def appendToLog(strLog):
+    file = open("newfile.txt", "a")
+    file.write(str(strLog))
+    file.close()

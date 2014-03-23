@@ -1,5 +1,8 @@
 
 {% extends "base.html" %}
+
+{% block mCreate%}active{% endblock %}
+
 {% load staticfiles %}
 {% block extra_head%}
     <meta charset="utf-8">
@@ -18,7 +21,7 @@
 {% block mEvts%}active{% endblock %}
 {% block content%}
 <div class="left">
-<form action="/create_event/" method="post">{% csrf_token %}
+<form action="{% url "create_event"%}" method="post">{% csrf_token %}
 {{ form.as_p }}
 	Nom de l'événements : <input type="text" name="titre"><br>
 	Date début: <input type="date" name="dateDebut"><br>
