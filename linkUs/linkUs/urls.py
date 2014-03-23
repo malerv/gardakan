@@ -16,9 +16,4 @@ urlpatterns = patterns('',
     url(r'^eventList.html$', views.event_list, name='event_list'),
     url(r'^send_coord.html$', views.receive_coord, name='send_coord'),
     url(r'^admin/', include(admin.site.urls)),
-<<<<<<< HEAD
-    url("", include('django_socketio.urls'))
-=======
-    
->>>>>>> 06733dc0ed761110e1df99b788a794b61d31b42b
 )
