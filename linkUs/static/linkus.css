@@ -18,6 +18,7 @@
 {
     text-align : left;
     height:300px;
+    overflow-y: scroll;
 }
 
 .toMe
@@ -90,7 +91,7 @@
 .chatTA
 {
     height: 60px;
-    width: 700px; /*chatinputdiv.width - 5 - sendbtn.width*/
+    width: 680px; /*chatinputdiv.width - 5 - sendbtn.width*/
     border: 1px solid #FFA74F;
     margin: 0px;
     padding: 0px;
