@@ -8,7 +8,7 @@ import json
 import math
 from pprint import pprint
 from chatUs.models import Event, City
-from utils.geo  import  getLatFromStrPoint, getLonFromStrPoint, getDistanceBetween
+from utils.geo  import  getLatFromStrPoint, getLonFromStrPoint, getDistanceBetween, getLatLonFromAddr
 
 #from utils  import geo
 from operator import itemgetter
@@ -20,7 +20,7 @@ def AddEvents(events):
         pprint(event)
         
         
-     
+        IsOk = True
         tName  = event.get('TITRE')
         tSubtitle = None
         tDescription = event.get('DESCRIP')
@@ -51,39 +51,41 @@ def AddEvents(events):
         if tGeometry == None:
         
             if tAdress != None:
-                pass
-                #TODO_GetPointFromAdress(Ad)  
+                LatLonArray = getLatLonFromAddr(tAdress)
+                tLatitude = LatLonArray[0]
+                tLongitude = LatLonArray[1]
+                 
             else:
-                tLatitude = 0
-                tLongitude = 0
+                IsOk = False
                  
         else:
             
             tLatitude = getLatFromStrPoint(tGeometry)
             tLongitude = getLonFromStrPoint(tGeometry)
             
-
-        DjanCity, fuckOff = City.objects.get_or_create(Name = tCityName, MunID = tMunID)
-
-
-        DjanEvent = Event(
-                          Name = tName,
-                          Subtitle = tSubtitle,
-                          Description = tDescription,
-                          Information = tInformation,
-                          StartDate = tStartDate,
-                          EndDate = tEndDate,
-                          StartTime = tStartTime,
-                          EndTime = tEndTime,
-                          WeekDay = tWeekDay,
-                          Category = tCategory,
-                          Adress = tAdress,
-                          Latitude = tLatitude,
-                          Longitude = tLongitude,
-                          City = DjanCity
-                           )
+        if IsOk:
         
-        DjanEvent.save()
+            DjanCity, fuckOff = City.objects.get_or_create(Name = tCityName, MunID = tMunID)
+
+
+            DjanEvent = Event(
+                              Name = tName,
+                              Subtitle = tSubtitle,
+                              Description = tDescription,
+                              Information = tInformation,
+                              StartDate = tStartDate,
+                              EndDate = tEndDate,
+                              StartTime = tStartTime,
+                              EndTime = tEndTime,
+                              WeekDay = tWeekDay,
+                              Category = tCategory,
+                              Adress = tAdress,
+                              Latitude = tLatitude,
+                              Longitude = tLongitude,
+                              City = DjanCity
+                              )
+        
+            DjanEvent.save()
     
     
 
