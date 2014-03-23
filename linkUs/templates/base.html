@@ -17,6 +17,18 @@
     <!-- Custom styles for this template -->
     <link href="{% static "linkus.css"%}" rel="stylesheet">
     {% block extra_head %}{% endblock extra_head %}
+    
+    {% load socketio_tags %}
+    {% socketio %}
+    <script>
+        var socket = new io.Socket();
+        socket.connect();
+        socket.on('connect', function() {
+            socket.subscribe('my channel');
+            console.log('Connected to socket');
+        });
+        // etc TODO
+    </script>
   </head>
 
   <body>

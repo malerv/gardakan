@@ -14,4 +14,5 @@ urlpatterns = patterns('',
     url(r'^event.html$', views.event, name='event'),
     url(r'^eventList.html$', views.event_list, name='event_list'),
     url(r'^admin/', include(admin.site.urls)),
+    url("", include('django_socketio.urls'))
 )
