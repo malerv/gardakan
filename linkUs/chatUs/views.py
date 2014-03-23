@@ -77,7 +77,6 @@ def event_list(request):
     print request.session['latitude']
     print request
     event_list = Util_DB.GetSortedEventList(request.session['latitude'],request.session['longitude'])
-
     
     return render_to_response('eventlist.html',
         {
