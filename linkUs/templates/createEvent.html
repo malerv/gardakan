@@ -18,7 +18,8 @@
 {% block mEvts%}active{% endblock %}
 {% block content%}
 <div class="left">
-<form>
+<form action="/create_event/" method="post">{% csrf_token %}
+{{ form.as_p }}
 	Nom de l'événements : <input type="text" name="titre"><br>
 	Date : <input type="date" name="date"><br>
 	Heure de début : <input type="time" name="heureDebut"><br>
