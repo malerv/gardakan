@@ -8,15 +8,12 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils import simplejson
 import socket
 
-<<<<<<< HEAD
 from chatUs.models import Event, ChatLOG
 from utils.geo import getLatFromStrPoint, getLonFromStrPoint
-=======
 
 from chatUs.models import Event
 from utils.geo import getLatFromStrPoint, getLonFromStrPoint, appendToLog
 from chatUs import Util_DB
->>>>>>> e2e63f96cdec1558d6818cdcf5c9894adf19990d
 # Create your views here.
 
 @csrf_exempt
