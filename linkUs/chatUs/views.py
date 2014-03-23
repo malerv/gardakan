@@ -32,14 +32,13 @@ def input_message(request):
         textToSend = request.POST["text"]
     
     #If there a name then a new message has been posted
-    if uName != ""
+    if uName:
         chatlog = ChatLOG(Event='1', User=uName, Text=textToSend, DateTime=timeText)
-        chatlog.save();
+        chatlog.save()
     #Otherwise it is considered a request for the newest
     #data, based on the timeText which will instead
     #represent the time in since 1/1/1970
-    else
-        #TODO
+    
     
     return HttpResponse("{'text':'salut!'}", mimetype="application/json")
 
@@ -93,7 +92,9 @@ def login(request):
 def event(request, event_id):
     appendToLog( 'event: ')
     event = get_object_or_404(Event, id=event_id)
-    topThree = Util_DB.GetSortedEventList(request.session['latitude'],request.session['longitude'])[0:3]
+    topThree = []
+    if request.session.has_key('latitude') and request.session.has_key('longitude'):
+        topThree = Util_DB.GetSortedEventList(request.session['latitude'],request.session['longitude'])[0:3]
     
     
     
@@ -110,9 +111,12 @@ def event(request, event_id):
 
 def event_list(request):
     
-    print request.session['latitude']
+    #print request.session['latitude']
     print request
-    event_list = Util_DB.GetSortedEventList(request.session['latitude'],request.session['longitude'])
+    
+    event_list = []
+    if request.session.has_key('latitude') and request.session.has_key('longitude'):
+        event_list = Util_DB.GetSortedEventList(request.session['latitude'],request.session['longitude'])
     topThree = event_list[0:3]
     
     return render_to_response('eventList.html',
@@ -124,7 +128,9 @@ def event_list(request):
 
 
 def create_event(request):
-    topThree = Util_DB.GetSortedEventList(request.session['latitude'],request.session['longitude'])[0:3]
+    topThree = []
+    if request.session.has_key('latitude') and request.session.has_key('longitude'):
+        topThree = Util_DB.GetSortedEventList(request.session['latitude'],request.session['longitude'])[0:3]
     if request.method == 'POST': # If the form has been submitted...
         form = CreateEventForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
