@@ -97,15 +97,9 @@ def login(request):
 def event(request, event_id):
     appendToLog( 'event: ')
     event = get_object_or_404(Event, id=event_id)
-<<<<<<< HEAD
-    
-    #appendToLog( event.Adress)
-    topThree = Util_DB.GetSortedEventList(request.session['latitude'],request.session['longitude'])[0:3]
-=======
     topThree = []
     if request.session.has_key('latitude') and request.session.has_key('longitude'):
         topThree = Util_DB.GetSortedEventList(request.session['latitude'],request.session['longitude'])[0:3]
->>>>>>> e884dbaded0942ea3f6847c748c4a62980b3f717
     
     
     
@@ -122,7 +116,7 @@ def event(request, event_id):
 
 def event_list(request):
     
-    #print request.session['latitude']
+
     print request
     
     event_list = []
