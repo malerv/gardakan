@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.http import *
 from django.views.decorators.csrf import csrf_exempt
 from django.utils import simplejson
-import socket
+
 
 from chatUs.models import Event, ChatLOG
 from utils.geo import getLatFromStrPoint, getLonFromStrPoint
