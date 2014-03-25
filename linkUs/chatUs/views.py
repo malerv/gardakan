@@ -67,6 +67,7 @@ def login(request):
     """
     message = None
     form = None
+    topThree = []
     if request.method == 'POST':
 
         if request.session.test_cookie_worked():
@@ -81,10 +82,9 @@ def login(request):
         form = LoginForm()
 
     request.session.set_test_cookie()
-    if(request.session['username']):
+    if("username" in request.session):
         topThree = Util_DB.GetSortedEventList(request.session['latitude'],request.session['longitude'])[0:3]
-    else:
-        topThree = Util_DB.GetSortedEventList(request.session['latitude'],request.session['longitude'])[0:3]
+    
         
     return render_to_response('index.html',
                               {
@@ -100,10 +100,7 @@ def event(request, event_id):
     topThree = []
     if request.session.has_key('latitude') and request.session.has_key('longitude'):
         topThree = Util_DB.GetSortedEventList(request.session['latitude'],request.session['longitude'])[0:3]
-    
-    
-    
-    
+  
     return render_to_response('event.html',
         {
         "event" : event,
@@ -115,10 +112,6 @@ def event(request, event_id):
     
 
 def event_list(request):
-    
-
-    print request
-    
     event_list = []
     if request.session.has_key('latitude') and request.session.has_key('longitude'):
         event_list = Util_DB.GetSortedEventList(request.session['latitude'],request.session['longitude'])
