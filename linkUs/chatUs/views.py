@@ -82,7 +82,7 @@ def login(request):
         form = LoginForm()
 
     request.session.set_test_cookie()
-    if("username" in request.session):
+    if('latitude' in request.session) and ('longitude' in request.session):
         topThree = Util_DB.GetSortedEventList(request.session['latitude'],request.session['longitude'])[0:3]
     
         
@@ -132,8 +132,7 @@ def create_event(request):
     if request.method == 'POST': # If the form has been submitted...
         form = CreateEventForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
-            
-            print request.POST
+
             if request.POST['ville'].tolower() == "sherbrooke":
                 
                 
