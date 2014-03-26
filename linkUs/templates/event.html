@@ -50,10 +50,9 @@
       </div>
     <textarea id="chatinputTA" class="chatTA"
     onkeyup="if(event.keyCode==13 && !event.shiftKey){ enterMessage('chatinputTA');}"></textarea>
-    
+    </br>
     <button class="sendbtn"  onclick="enterMessage('chatinputTA');">Envoyer</button>
-
-    <iframe id="blankIframe" height="0" width="0" style="display:none;" tabindex="-1"></iframe>
+    </br>
     </div>
   </div>
   <div class="panel panel-default">
@@ -122,4 +121,7 @@
     </div>
   </div>
 </div>
+{% endblock %}
+{% block extra_script %}
+<script language="javascript" type="text/javascript" src="{% static "chat_client.js" %}" ></script>
 {% endblock %}

@@ -17,8 +17,6 @@
 .panel-body
 {
     text-align : left;
-    height:300px;
-    overflow-y: scroll;
 }
 
 .toMe
@@ -104,4 +102,9 @@
     height:100%;
     padding:0px;
     margin:0px;
+}
+
+#chatMessagesdiv_1
+{
+    min-height: 250px;;
 }
