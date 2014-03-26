@@ -1,11 +1,9 @@
 function enterMessage(textID)
 {
     var textBox = document.getElementById(textID);
-    var textHF = document.getElementById("textToSend");
-    var currentTimeHF = document.getElementById("currentTime");
     var sendTextForm = $('#inputMessageForm');
     var messageText = textBox.value;
-    var uName = document.getElementById("userName").value;
+    var uName = userName
     textBox.value = "";
     var today = new Date();
     var hours=today.getHours();
@@ -19,13 +17,11 @@ function enterMessage(textID)
     else {
         return;
     }
-    
-    textHF.value = messageText;
-    currentTimeHF.value = new Date().getTime() / 1000;
-    
-    var inputString = "{ userName:'" + uName +"',";
-        inputString += "time:'" + hours + "h" + minutes + "',";
-        inputString += "text:'" + messageText + "'}";
+
+    var inputString = '{ "userName": "' + uName +'", ';
+        inputString += '"time":"' + today.toJSON() + '", ';
+        inputString += '"text": "' + messageText + '", ';
+        inputString += '"event": "' + chatId + '"}';
     
     $(document).ready(function(){
         $.ajax({
@@ -49,7 +45,7 @@ function enterMessage(textID)
 
 function insertMessage(userID, message, containerID)
 {
-    var user = document.getElementById(userID).value;
+    var user = userName
     var mycontainer = document.getElementById(containerID);
     var newMessage = '';
     var today = new Date();

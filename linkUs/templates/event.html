@@ -2,17 +2,15 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block extra_head%}
-    
-    <form method="POST" name="enterText">
-        {% if request.session.username %}
-        <input type="hidden" id="userName" value="{{request.session.username}}"></input>
-        {% else %}
-        <input type="hidden" id="userName" value="Anonyme"></input>
-        {% endif %}
-        <input type="hidden" id="chatid" value="{{event.id}}"></input>
-        <input type="hidden" id="textToSend"></input>
-        <input type="hidden" id="currentTime"></input>
-    </form>
+<script>
+{% if request.session.username %}
+    var userName = "{{request.session.username}}";
+{% else %}
+    var userName = "Anonyme";
+{% endif %}
+
+var chatId = "{{event.id}}";
+</script>
 {% endblock extra_head%}
 
 {% block mEvts%}active{% endblock %}

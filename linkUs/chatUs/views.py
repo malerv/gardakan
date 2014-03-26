@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.http import *
 from django.views.decorators.csrf import csrf_exempt
 from django.utils import simplejson
-
+import json
 
 from chatUs.models import Event, ChatLOG
 from utils.geo import getLatFromStrPoint, getLonFromStrPoint
@@ -21,19 +21,23 @@ def input_message(request):
     uName = ""
     timeText = ""
     textToSend = ""
-    
-    print request.POST
-    
-    if request.POST.has_key("userName"):
-        uName = request.POST["userName"]
-    if request.POST.has_key("time"):
-        timeText = request.POST["time"]
-    if request.POST.has_key("text"):
-        textToSend = request.POST["text"]
-    
-    #If there a name then a new message has been posted
-    if uName:
-        chatlog = ChatLOG(Event='1', User=uName, Text=textToSend, DateTime=timeText)
+    event = None
+
+    data = json.loads(request.POST['client_response'])
+
+    if data.has_key("userName"):
+        uName = data["userName"]
+    if data.has_key("time"):
+        timeText = data["time"]
+    if data.has_key("text"):
+        textToSend = data["text"]
+   
+    if data.has_key("event"):
+        event = get_object_or_404(Event, id=data["event"])
+
+    #If there a name and an event then a new message has been posted
+    if uName and event:
+        chatlog = ChatLOG(Event=event, User=uName, Text=textToSend, DateTime=timeText)
         chatlog.save()
     #Otherwise it is considered a request for the newest
     #data, based on the timeText which will instead
@@ -134,8 +138,7 @@ def create_event(request):
         if form.is_valid(): # All validation rules pass
 
             if request.POST['ville'].tolower() == "sherbrooke":
-                
-                
+                       
                 DjanCity, fuckOff = City.objects.get_or_create(Name = "Sherbrooke")
                 DjanEvent = Event(
                                   Name = request.POST['titre'],
@@ -164,7 +167,7 @@ def create_event(request):
         'form': form,
         "topThree" : topThree,
         },
-          context_instance = RequestContext(request) )
+        context_instance = RequestContext(request) )
 
 @csrf_exempt
 def receive_coord(request):
