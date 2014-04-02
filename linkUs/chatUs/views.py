@@ -11,9 +11,11 @@ import json
 from chatUs.models import Event, ChatLOG
 from utils.geo import getLatFromStrPoint, getLonFromStrPoint
 
-from chatUs.models import Event
+from chatUs.models import Event, ChatLOG
 from utils.geo import getLatFromStrPoint, getLonFromStrPoint, appendToLog
 from chatUs import Util_DB
+import datetime
+import dateutil.parser
 # Create your views here.
 
 @csrf_exempt
@@ -22,7 +24,7 @@ def input_message(request):
     timeText = ""
     textToSend = ""
     event = None
-
+    print request.POST
     data = json.loads(request.POST['client_response'])
 
     if data.has_key("userName"):
@@ -43,6 +45,19 @@ def input_message(request):
     #data, based on the timeText which will instead
     #represent the time in since 1/1/1970
     
+    
+    return HttpResponse("{'text':'salut!'}", mimetype="application/json")
+
+@csrf_exempt
+def pull_message(request):
+    print request.POST
+    data = json.loads(request.POST['client_response'])
+    print 2
+    if data.has_key("date"):
+        date = dateutil.parser.parse(data["date"])
+    
+    chats = ChatLOG.objects.all()
+    print chats
     
     return HttpResponse("{'text':'salut!'}", mimetype="application/json")
 

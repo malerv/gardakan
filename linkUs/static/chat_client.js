@@ -1,3 +1,26 @@
+var last_pull = new Date();
+
+function pullMessage()
+{
+    var inputString = '{ "date":"' + last_pull.toJSON() + '",';
+    inputString += '"event": "' + chatId + '"}';
+    $.ajax({
+        url : "/pull_message",
+        type : "POST",
+        dataType: "json",
+        data : {
+            client_response : inputString,
+        },
+        success : function(json) {
+        console.log('Server response : ' + json.server_response);
+        },
+        error : function(xhr,errmsg,err) {
+            console.log(xhr.status + "****: " + xhr.responseText);
+            console.log(errmsg);
+        }
+    });
+}
+
 function enterMessage(textID)
 {
     var textBox = document.getElementById(textID);
@@ -22,7 +45,7 @@ function enterMessage(textID)
         inputString += '"time":"' + today.toJSON() + '", ';
         inputString += '"text": "' + messageText + '", ';
         inputString += '"event": "' + chatId + '"}';
-    
+    console.log(inputString)
     $(document).ready(function(){
         $.ajax({
             url : "/input_message",
@@ -41,6 +64,7 @@ function enterMessage(textID)
         });
         return false;
     });
+    pullMessage()
 }
 
 function insertMessage(userID, message, containerID)
@@ -59,3 +83,4 @@ function insertMessage(userID, message, containerID)
     
     mycontainer.innerHTML += newMessage;
 }
+

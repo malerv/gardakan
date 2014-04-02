@@ -2,6 +2,7 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block extra_head%}
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <script>
 {% if request.session.username %}
     var userName = "{{request.session.username}}";
@@ -10,6 +11,59 @@
 {% endif %}
 
 var chatId = "{{event.id}}";
+
+var map;
+function initialize() {
+
+  var mapOptions = {
+    zoom: 16,
+    {% if request.session.latitude %}
+        center: new google.maps.LatLng({{request.session.latitude}}, 
+                                       {{request.session.longitude}})
+    {% else %}
+        center: new google.maps.LatLng(45.4000, 71.9000)
+    {% endif %}
+  };
+
+  map = new google.maps.Map(document.getElementById('map'),
+      mapOptions);
+  
+  {% if request.session.latitude %}
+  var userLatlng = new google.maps.LatLng({{request.session.latitude}},
+                                          {{request.session.longitude}});
+
+  var user = new google.maps.Marker({
+      position: userLatlng,
+      map: map,
+      title: 'Your position'
+  });
+  {% endif %}
+ 
+  {% if event.Latitude %}
+  var eventLatlng = new google.maps.LatLng({{event.Latitude}},
+                                          {{event.Longitude}});
+
+  var event = new google.maps.Marker({
+      position: eventLatlng,
+      map: map,
+      title: 'The event'
+  });
+  {% else %}
+    var address = "{{event.Adress}}";
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode( { 'address': address}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        var marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location
+        });
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+  {% endif %}  
+}
+
 </script>
 {% endblock extra_head%}
 
@@ -80,39 +134,8 @@ var chatId = "{{event.id}}";
     <div id="collapseFour" class="panel-collapse collapse">
       <div class="panel-body">
 
-        <div id="map" style="width: 400px; height: 300px;"></div>
-        <script type="text/javascript">
-	   //var address = document.getElementById('address').value;
-		var address = {{event.Adress}};
-	  
-		var map = new google.maps.Map(document.getElementById('map'), { 
-			mapTypeId: google.maps.MapTypeId.TERRAIN,
-			zoom: 80
-		});
+        <div id="map" style="width: 100%; height: 300px;"></div>
 
-	       var map = new google.maps.Map(document.getElementById("map"),mapProp);
-
-		var geocoder = new google.maps.Geocoder();
-	       marker = new google.maps.Marker({
-	           position:myCenter,
-	       });
-
-	       marker.setMap(map);
-	  
- }
-        //google.maps.event.trigger(map, "resize");
-
-		geocoder.geocode({
-			'address': address
-		}, function(results, status) {
-				if(status == google.maps.GeocoderStatus.OK) {
-					new google.maps.Marker({
-						position: results[0].geometry.location,
-						map: map
-				});
-		 map.setCenter(results[0].geometry.location);
-				}
-			});
 </script>
         
       </div>
@@ -122,4 +145,18 @@ var chatId = "{{event.id}}";
 {% endblock %}
 {% block extra_script %}
 <script language="javascript" type="text/javascript" src="{% static "chat_client.js" %}" ></script>
+<script>
+// If we initialize the googlemap more than once, there is some flicking
+var init = true;
+
+// We initialize the map the first time "collapsefour" is shown
+$('#collapseFour').on('shown.bs.collapse', function () {
+  if (init)
+  {
+    initialize();
+    init = false;
+  }
+  
+})
+</script> 
 {% endblock %}

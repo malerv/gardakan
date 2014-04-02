@@ -17,4 +17,5 @@ urlpatterns = patterns('',
     url(r'^send_coord.html$', views.receive_coord, name='send_coord'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^input_message$', views.input_message, name='input_message'),
+    url(r'^pull_message$', views.pull_message, name='pull_message'),
 )
