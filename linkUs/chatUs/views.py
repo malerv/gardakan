@@ -8,6 +8,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils import simplejson
 import json
 
+from django.core import serializers
+
 from chatUs.models import Event, ChatLOG
 from utils.geo import getLatFromStrPoint, getLonFromStrPoint
 
@@ -25,14 +27,17 @@ def input_message(request):
     textToSend = ""
     event = None
     print request.POST
-    data = json.loads(request.POST['client_response'])
+
+    #we escape \n and \r
+    data = json.loads(request.POST['client_response'].replace('\n', '\\n').replace('\r', '\\r'))
 
     if data.has_key("userName"):
         uName = data["userName"]
     if data.has_key("time"):
         timeText = data["time"]
     if data.has_key("text"):
-        textToSend = data["text"]
+        #we put back \n and or \r
+        textToSend = data["text"].replace('\\r','\r').replace('\\n','\n')
    
     if data.has_key("event"):
         event = get_object_or_404(Event, id=data["event"])
@@ -48,6 +53,7 @@ def input_message(request):
     
     return HttpResponse("{'text':'salut!'}", mimetype="application/json")
 
+
 @csrf_exempt
 def pull_message(request):
     print request.POST
@@ -57,9 +63,10 @@ def pull_message(request):
         date = dateutil.parser.parse(data["date"])
     
     chats = ChatLOG.objects.all()
-    print chats
+    data = serializers.serialize('json', chats)
+    print data
     
-    return HttpResponse("{'text':'salut!'}", mimetype="application/json")
+    return HttpResponse(data, mimetype="application/json")
 
 class LoginForm(forms.Form):
     """

@@ -62,8 +62,9 @@ function initialize() {
       }
     });
   {% endif %}  
-}
 
+}
+  google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 {% endblock extra_head%}
 
@@ -151,11 +152,12 @@ var init = true;
 
 // We initialize the map the first time "collapsefour" is shown
 $('#collapseFour').on('shown.bs.collapse', function () {
-  if (init)
-  {
-    initialize();
-    init = false;
-  }
+  google.maps.event.trigger(map, 'resize')
+  //if (init)
+  //{
+  //  initialize();
+  //  init = false;
+  //}
   
 })
 </script> 
